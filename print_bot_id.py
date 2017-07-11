@@ -2,7 +2,7 @@ import os
 from slackclient import SlackClient
 import pprint
 
-BOT_NAME = 'feedbackinator'
+BOT_NAME = 'weatherbot'
 
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 

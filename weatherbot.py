@@ -7,7 +7,6 @@ BOT_ID = os.environ.get("BOT_ID")
 
 # constants
 AT_BOT = "<@" + BOT_ID + ">"
-EXAMPLE_COMMAND = "do"
 
 # instantiate Slack & Twilio clients
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
@@ -17,9 +16,7 @@ def handle_command(command, channel):
     """Receives commands directed at the bot and determines if they
     are valic commands. If so, then acts on the commands. If not, returns back
     what it needs for clarification."""
-    response = "Not sure what you mean. Use the *{0}* command with numbers, delimited by spaces".format(EXAMPLE_COMMAND)
-    if command.startswith(EXAMPLE_COMMAND):
-        response = "Sure... write some more code then I can do that!"
+    response = "Works like a charm"
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
 
