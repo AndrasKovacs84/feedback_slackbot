@@ -287,4 +287,6 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 
+# Virtualenv folders
 feedback_slackbot/
+weatherbot_slackbot/
