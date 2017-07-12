@@ -290,3 +290,6 @@ __pycache__/
 # Virtualenv folders
 feedback_slackbot/
 weatherbot_slackbot/
+
+# .vscode folder
+.vscode/
