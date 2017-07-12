@@ -1,7 +1,9 @@
 import os
 import time
 from slackclient import SlackClient
-
+from flask import Flask, request
+import simplejson as json
+import requests
 # feedbackinator's id as an environment variable
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -12,12 +14,25 @@ AT_BOT = "<@" + BOT_ID + ">"
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 
 
+def get_weather(city):
+    url = "http://api.openweathermap.org/data/2.5/weather?q=" + \
+        city + "&units=metric" + os.environ.get('OVM_API_KEY')
+    parsed_json_response = json.loads(requests.get(url).text)
+    min_temp = parsed_json_response['main']['temp_min']
+    max_temp = parsed_json_response['main']['temp_max']
+    avg_temp = str(int(round((min_temp+max_temp)/2)))
+    return city.capitalize() + ": " + "Average temperature is " + \
+        avg_temp + " degree Celsius.\nHave a nice day!"
+
+
 def handle_command(command, channel):
     """Receives commands directed at the bot and determines if they
-    are valic commands. If so, then acts on the commands. If not, returns back
+    are valid commands. If so, then acts on the commands. If not, returns back
     what it needs for clarification."""
-    response = "Works like a charm"
-    slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
+    slack_client.api_call("chat.postMessage",
+                          channel=channel,
+                          text=get_weather(command),
+                          as_user=True)
 
 
 def parse_slack_output(slack_rtm_output):
