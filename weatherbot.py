@@ -18,11 +18,14 @@ def get_weather(city):
     url = "http://api.openweathermap.org/data/2.5/weather?q=" + \
         city + "&units=metric" + os.environ.get('OWM_API_KEY')
     parsed_json_response = json.loads(requests.get(url).text)
-    min_temp = parsed_json_response['main']['temp_min']
-    max_temp = parsed_json_response['main']['temp_max']
-    avg_temp = str(int(round((min_temp+max_temp)/2)))
-    return city.capitalize() + ": " + "Average temperature is " + \
-        avg_temp + " degree Celsius.\nHave a nice day!"
+    if parsed_json_response['cod'] != "404":
+        min_temp = parsed_json_response['main']['temp_min']
+        max_temp = parsed_json_response['main']['temp_max']
+        avg_temp = str(int(round((min_temp+max_temp)/2)))
+        return parsed_json_response['name'].capitalize() + ": " + "Average temperature is " + \
+            avg_temp + " degree Celsius.\nHave a nice day!"
+    else:
+        return "Unknown city"
 
 
 def handle_command(command, channel):
