@@ -16,7 +16,7 @@ slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 
 def get_weather(city):
     url = "http://api.openweathermap.org/data/2.5/weather?q=" + \
-        city + "&units=metric" + os.environ.get('OVM_API_KEY')
+        city + "&units=metric" + os.environ.get('OWM_API_KEY')
     parsed_json_response = json.loads(requests.get(url).text)
     min_temp = parsed_json_response['main']['temp_min']
     max_temp = parsed_json_response['main']['temp_max']

@@ -1,5 +1,5 @@
 . weatherbot_slackbot/bin/activate &&
 export BOT_ID='U67P5TPPY' &&
 export SLACK_BOT_TOKEN='xoxb-211787941814-WBtZ67dcPbKSXvbzHWXJM8RG' &&
-export OVM_API_KEY='&APPID=84e85780788d90b219aaf232971e15fb' &&
+export OWM_API_KEY='&APPID=84e85780788d90b219aaf232971e15fb' &&
 python3 weatherbot.py
